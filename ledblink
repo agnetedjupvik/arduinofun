@@ -1,0 +1,34 @@
+int led_red1 = 9;
+int led_yellow = 8;
+int led_green1 = 7;
+int led_red2 = 6;
+int led_green2 = 5;
+int buttonPin = 2;
+
+void setup() {
+  pinMode(led_red1, OUTPUT); 
+  pinMode(led_yellow, OUTPUT); 
+  pinMode(led_green1, OUTPUT); 
+  pinMode(led_red2, OUTPUT); 
+  pinMode(led_green2, OUTPUT); 
+}
+
+void loop() {
+  digitalWrite(led_red1, HIGH);
+  delay(1000);
+  digitalWrite(led_red1, LOW);
+  digitalWrite(led_yellow, HIGH);
+  delay(1000);
+  digitalWrite(led_yellow, LOW);
+  digitalWrite(led_green1, HIGH);
+  delay(1000);
+  digitalWrite(led_green1, LOW);
+  digitalWrite(led_red2, HIGH);
+  delay(1000);
+  digitalWrite(led_red2, LOW);
+  digitalWrite(led_green2, HIGH);
+  delay(1000); 
+  digitalWrite(led_green2, LOW);
+
+ 
+}
