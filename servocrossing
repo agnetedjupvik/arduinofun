@@ -1,0 +1,83 @@
+#include <Servo.h>
+
+Servo myservo; 
+int pos = 0;
+
+
+int led_red1 = 9;
+int led_yellow = 8;
+int led_green1 = 7;
+int led_red2 = 6;
+int led_green2 = 5;
+int buttonPin = 2;
+
+int buttonState = 0;
+
+void setup() {
+  pinMode(led_red1, OUTPUT); 
+  pinMode(led_yellow, OUTPUT); 
+  pinMode(led_green1, OUTPUT); 
+  pinMode(led_red2, OUTPUT); 
+  pinMode(led_green2, OUTPUT); 
+  pinMode(buttonPin, INPUT);
+  
+  digitalWrite(led_red1, LOW);
+  digitalWrite(led_yellow, LOW);
+  digitalWrite(led_green1, HIGH);
+  digitalWrite(led_red2, HIGH);
+  digitalWrite(led_green2, LOW);
+  
+  myservo.attach(1);
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+  
+  if (buttonState == HIGH) {
+    delay(1000);
+    digitalWrite(led_green1, LOW);
+    digitalWrite(led_yellow, HIGH);
+    delay(1000);
+    digitalWrite(led_yellow, LOW);
+    digitalWrite(led_red1, HIGH);
+    delay(2000);
+    digitalWrite(led_red2, LOW);
+    for (pos = 0 ; pos < 180 ; pos += 1) {
+      myservo.write(pos);
+      delay(15);
+    }
+    
+    digitalWrite(led_green2, HIGH); 
+    delay(3000);
+    digitalWrite(led_green2, LOW);
+    delay(500);
+    digitalWrite(led_green2, HIGH); 
+    delay(500);
+    digitalWrite(led_green2, LOW);
+    delay(500);
+    digitalWrite(led_green2, HIGH); 
+    delay(500);
+    digitalWrite(led_green2, LOW);
+    digitalWrite(led_red2, HIGH); //redlight pedestrians
+    
+    for (pos = 180 ; pos >= 1 ; pos -= 1) {
+      myservo.write(pos);
+      delay(15);
+    }
+    
+    delay(2000);
+    digitalWrite(led_yellow, HIGH);
+    delay(1000);
+    digitalWrite(led_red1, LOW);
+    digitalWrite(led_yellow, LOW);
+    digitalWrite(led_green1, HIGH); //greenlight cars
+    
+  }
+  else {
+    digitalWrite(led_red1, LOW);
+    digitalWrite(led_yellow, LOW);
+    digitalWrite(led_green1, HIGH);
+    digitalWrite(led_red2, HIGH);
+    digitalWrite(led_green2, LOW);
+  } 
+}
